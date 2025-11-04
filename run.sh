@@ -15,7 +15,7 @@ fi
 
 dpkg -l | grep libmysqlclient-dev
 if [ $? -ne 0 ]; then
-	sudo apt-get install libmysqlclient-dev
+	sudo apt-get install libmysqlclient-dev -y
 fi
 
 source .venv/bin/activate
