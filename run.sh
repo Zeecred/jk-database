@@ -9,6 +9,9 @@ if ! [ -x "$(command -v python3)" ]; then
 fi
 
 echo "Loading existing virtual environment."
+if [ ! -d .venv ]; then
+	python3 -m venv .venv
+fi
 source .venv/bin/activate
 pip install -r requirements.txt
 python3 create_databases.py 
