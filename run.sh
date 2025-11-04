@@ -12,6 +12,12 @@ echo "Loading existing virtual environment."
 if [ ! -d .venv ]; then
 	python3 -mvenv .venv
 fi
+
+dpkg -l | grep libmysqlclient-dev
+if [ $? -ne 0 ]; then
+	sudo apt-get install libmysqlclient-dev
+fi
+
 source .venv/bin/activate
 pip install -r requirements.txt
 python3 create_databases.py 
