@@ -8,7 +8,7 @@
         {
           "database": "core",
           "tables": "*",
-          "privileges": ["SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "ALTER", "DROP"]
+          "privileges": ["SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "ALTER", "DROP", "REFERENCES", "INDEX", "CREATE VIEW", "CREATE ROUTINE", "ALTER ROUTINE", "TRIGGER", "CREATE TEMPORARY TABLES", "LOCK TABLES"]
         }
       ]
     },
@@ -20,7 +20,7 @@
         {
           "database": "ccb",
           "tables": "*",
-          "privileges": ["SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "ALTER", "DROP"]
+          "privileges": ["SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "ALTER", "DROP", "REFERENCES", "INDEX", "CREATE VIEW", "CREATE ROUTINE", "ALTER ROUTINE", "TRIGGER", "CREATE TEMPORARY TABLES", "LOCK TABLES"]
         }
       ]
     },
@@ -32,7 +32,7 @@
         {
           "database": "employeecredit",
           "tables": "*",
-          "privileges": ["SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "ALTER", "DROP"]
+          "privileges": ["SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "ALTER", "DROP", "REFERENCES", "INDEX", "CREATE VIEW", "CREATE ROUTINE", "ALTER ROUTINE", "TRIGGER", "CREATE TEMPORARY TABLES", "LOCK TABLES"]
         }
       ]
     },
@@ -44,7 +44,7 @@
         {
           "database": "fgtsbmp",
           "tables": "*",
-          "privileges": ["SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "ALTER", "DROP"]
+          "privileges": ["SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "ALTER", "DROP", "REFERENCES", "INDEX", "CREATE VIEW", "CREATE ROUTINE", "ALTER ROUTINE", "TRIGGER", "CREATE TEMPORARY TABLES", "LOCK TABLES"]
         }
       ]
     },
@@ -56,7 +56,7 @@
         {
           "database": "payrollloanbmp",
           "tables": "*",
-          "privileges": ["SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "ALTER", "DROP"]
+          "privileges": ["SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "ALTER", "DROP", "REFERENCES", "INDEX", "CREATE VIEW", "CREATE ROUTINE", "ALTER ROUTINE", "TRIGGER", "CREATE TEMPORARY TABLES", "LOCK TABLES"]
         }
       ]
     },
@@ -68,7 +68,7 @@
         {
           "database": "privatelabel",
           "tables": "*",
-          "privileges": ["SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "ALTER", "DROP"]
+          "privileges": ["SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "ALTER", "DROP", "REFERENCES", "INDEX", "CREATE VIEW", "CREATE ROUTINE", "ALTER ROUTINE", "TRIGGER", "CREATE TEMPORARY TABLES", "LOCK TABLES"]
         }
       ]
     }
