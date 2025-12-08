@@ -7,6 +7,29 @@ with open('databases.json') as f:
 with open('my-credentials.json') as file:
     credentials = json.load(file)
 
+import socket
+import time
+
+def wait_for_port_open(host, port):
+    countDown=90
+    while True:
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        try:
+            print(f"Trying to connect to {host}:{port}. Count down: {countDown}")
+            s.connect((host, port))
+            s.close()
+            break
+        except socket.error:
+            pass
+        countDown -= 1
+        if countDown == 0:
+            raise Exception(f"Could not connect to {host}:{port}")
+        time.sleep(0.5)
+
+print("Waiting for MySQL to start...")
+time.sleep(5)
+wait_for_port_open(credentials['host'], credentials['port'])
+
 cnx = mysql.connector.connect(
     user=credentials['username'],
     password=credentials['password'],
