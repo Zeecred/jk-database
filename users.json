@@ -1,76 +1,200 @@
 {
-  "users": [
-    {
-      "name": "core_user",
-      "host": "%",
-      "password": "Kxs3#Lm@Jk",
-      "privileges": [
+    "users": [
         {
-          "database": "core",
-          "tables": "*",
-          "privileges": ["SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "ALTER", "DROP"]
-        }
-      ]
-    },
-    {
-      "name": "ccb_user",
-      "host": "%",
-      "password": "mZ3#Pq@Jk",
-      "privileges": [
+            "name": "core_user",
+            "host": "%",
+            "password": "Kxs3#Lm@Jk",
+            "privileges": [
+                {
+                    "database": "core",
+                    "tables": "*",
+                    "privileges": [
+                        "SELECT",
+                        "INSERT",
+                        "UPDATE",
+                        "DELETE",
+                        "CREATE",
+                        "ALTER",
+                        "DROP",
+                        "REFERENCES",
+                        "INDEX",
+                        "CREATE VIEW",
+                        "CREATE ROUTINE",
+                        "ALTER ROUTINE",
+                        "TRIGGER",
+                        "CREATE TEMPORARY TABLES",
+                        "LOCK TABLES"
+                    ]
+                }
+            ]
+        },
         {
-          "database": "ccb",
-          "tables": "*",
-          "privileges": ["SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "ALTER", "DROP"]
-        }
-      ]
-    },
-    {
-      "name": "employeecredit_user",
-      "host": "%",
-      "password": "Qw4#Rt@Jk",
-      "privileges": [
+            "name": "ccb_user",
+            "host": "%",
+            "password": "mZ3#Pq@Jk",
+            "privileges": [
+                {
+                    "database": "ccb",
+                    "tables": "*",
+                    "privileges": [
+                        "SELECT",
+                        "INSERT",
+                        "UPDATE",
+                        "DELETE",
+                        "CREATE",
+                        "ALTER",
+                        "DROP",
+                        "REFERENCES",
+                        "INDEX",
+                        "CREATE VIEW",
+                        "CREATE ROUTINE",
+                        "ALTER ROUTINE",
+                        "TRIGGER",
+                        "CREATE TEMPORARY TABLES",
+                        "LOCK TABLES"
+                    ]
+                }
+            ]
+        },
         {
-          "database": "employeecredit",
-          "tables": "*",
-          "privileges": ["SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "ALTER", "DROP"]
-        }
-      ]
-    },
-    {
-      "name": "fgtsbmp_user",
-      "host": "%",
-      "password": "Hk5#Jp@Jk",
-      "privileges": [
+            "name": "employeecredit_user",
+            "host": "%",
+            "password": "Qw4#Rt@Jk",
+            "privileges": [
+                {
+                    "database": "employeecredit",
+                    "tables": "*",
+                    "privileges": [
+                        "SELECT",
+                        "INSERT",
+                        "UPDATE",
+                        "DELETE",
+                        "CREATE",
+                        "ALTER",
+                        "DROP",
+                        "REFERENCES",
+                        "INDEX",
+                        "CREATE VIEW",
+                        "CREATE ROUTINE",
+                        "ALTER ROUTINE",
+                        "TRIGGER",
+                        "CREATE TEMPORARY TABLES",
+                        "LOCK TABLES"
+                    ]
+                }
+            ]
+        },
         {
-          "database": "fgtsbmp",
-          "tables": "*",
-          "privileges": ["SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "ALTER", "DROP"]
-        }
-      ]
-    },
-    {
-      "name": "payrollloanbmp_user",
-      "host": "%",
-      "password": "Xc3#Lq@Jk",
-      "privileges": [
+            "name": "fgtsbmp_user",
+            "host": "%",
+            "password": "Hk5#Jp@Jk",
+            "privileges": [
+                {
+                    "database": "fgtsbmp",
+                    "tables": "*",
+                    "privileges": [
+                        "SELECT",
+                        "INSERT",
+                        "UPDATE",
+                        "DELETE",
+                        "CREATE",
+                        "ALTER",
+                        "DROP",
+                        "REFERENCES",
+                        "INDEX",
+                        "CREATE VIEW",
+                        "CREATE ROUTINE",
+                        "ALTER ROUTINE",
+                        "TRIGGER",
+                        "CREATE TEMPORARY TABLES",
+                        "LOCK TABLES"
+                    ]
+                }
+            ]
+        },
         {
-          "database": "payrollloanbmp",
-          "tables": "*",
-          "privileges": ["SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "ALTER", "DROP"]
-        }
-      ]
-    },
-    {
-      "name": "privatelabel_user",
-      "host": "%",
-      "password": "Rt4#Vw@Jk",
-      "privileges": [
+            "name": "payrollloanbmp_user",
+            "host": "%",
+            "password": "Xc3#Lq@Jk",
+            "privileges": [
+                {
+                    "database": "payrollloanbmp",
+                    "tables": "*",
+                    "privileges": [
+                        "SELECT",
+                        "INSERT",
+                        "UPDATE",
+                        "DELETE",
+                        "CREATE",
+                        "ALTER",
+                        "DROP",
+                        "REFERENCES",
+                        "INDEX",
+                        "CREATE VIEW",
+                        "CREATE ROUTINE",
+                        "ALTER ROUTINE",
+                        "TRIGGER",
+                        "CREATE TEMPORARY TABLES",
+                        "LOCK TABLES"
+                    ]
+                }
+            ]
+        },
         {
-          "database": "privatelabel",
-          "tables": "*",
-          "privileges": ["SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "ALTER", "DROP"]
+            "name": "privatelabel_user",
+            "host": "%",
+            "password": "Rt4#Vw@Jk",
+            "privileges": [
+                {
+                    "database": "privatelabel",
+                    "tables": "*",
+                    "privileges": [
+                        "SELECT",
+                        "INSERT",
+                        "UPDATE",
+                        "DELETE",
+                        "CREATE",
+                        "ALTER",
+                        "DROP",
+                        "REFERENCES",
+                        "INDEX",
+                        "CREATE VIEW",
+                        "CREATE ROUTINE",
+                        "ALTER ROUTINE",
+                        "TRIGGER",
+                        "CREATE TEMPORARY TABLES",
+                        "LOCK TABLES"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "creditengine_user",
+            "host": "%",
+            "password": "H6f#sQ@gP",
+            "privileges": [
+                {
+                    "database": "privatelabel",
+                    "tables": "*",
+                    "privileges": [
+                        "SELECT",
+                        "INSERT",
+                        "UPDATE",
+                        "DELETE",
+                        "CREATE",
+                        "ALTER",
+                        "DROP",
+                        "REFERENCES",
+                        "INDEX",
+                        "CREATE VIEW",
+                        "CREATE ROUTINE",
+                        "ALTER ROUTINE",
+                        "TRIGGER",
+                        "CREATE TEMPORARY TABLES",
+                        "LOCK TABLES"
+                    ]
+                }
+            ]
         }
-      ]
-    }
-  ]
+    ]
 }
