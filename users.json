@@ -1,7 +1,6 @@
 {
     "users": [
         {
-<<<<<<< HEAD
             "name": "core_user",
             "host": "%",
             "password": "Kxs3#Lm@Jk",
@@ -170,12 +169,12 @@
             ]
         },
         {
-            "name": "creditengine_user",
+            "name": "queuesentry_user",
             "host": "%",
-            "password": "H6f#sQ@gP",
+            "password": "iQ4#rH@hQ",
             "privileges": [
                 {
-                    "database": "privatelabel",
+                    "database": "queuesentry",
                     "tables": "*",
                     "privileges": [
                         "SELECT",
@@ -196,71 +195,34 @@
                     ]
                 }
             ]
-=======
-          "database": "core",
-          "tables": "*",
-          "privileges": ["SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "ALTER", "DROP", "REFERENCES", "INDEX", "CREATE VIEW", "CREATE ROUTINE", "ALTER ROUTINE", "TRIGGER", "CREATE TEMPORARY TABLES", "LOCK TABLES"]
-        }
-      ]
-    },
-    {
-      "name": "ccb_user",
-      "host": "%",
-      "password": "mZ3#Pq@Jk",
-      "privileges": [
+        },
         {
-          "database": "ccb",
-          "tables": "*",
-          "privileges": ["SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "ALTER", "DROP", "REFERENCES", "INDEX", "CREATE VIEW", "CREATE ROUTINE", "ALTER ROUTINE", "TRIGGER", "CREATE TEMPORARY TABLES", "LOCK TABLES"]
-        }
-      ]
-    },
-    {
-      "name": "employeecredit_user",
-      "host": "%",
-      "password": "Qw4#Rt@Jk",
-      "privileges": [
-        {
-          "database": "employeecredit",
-          "tables": "*",
-          "privileges": ["SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "ALTER", "DROP", "REFERENCES", "INDEX", "CREATE VIEW", "CREATE ROUTINE", "ALTER ROUTINE", "TRIGGER", "CREATE TEMPORARY TABLES", "LOCK TABLES"]
-        }
-      ]
-    },
-    {
-      "name": "fgtsbmp_user",
-      "host": "%",
-      "password": "Hk5#Jp@Jk",
-      "privileges": [
-        {
-          "database": "fgtsbmp",
-          "tables": "*",
-          "privileges": ["SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "ALTER", "DROP", "REFERENCES", "INDEX", "CREATE VIEW", "CREATE ROUTINE", "ALTER ROUTINE", "TRIGGER", "CREATE TEMPORARY TABLES", "LOCK TABLES"]
-        }
-      ]
-    },
-    {
-      "name": "payrollloanbmp_user",
-      "host": "%",
-      "password": "Xc3#Lq@Jk",
-      "privileges": [
-        {
-          "database": "payrollloanbmp",
-          "tables": "*",
-          "privileges": ["SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "ALTER", "DROP", "REFERENCES", "INDEX", "CREATE VIEW", "CREATE ROUTINE", "ALTER ROUTINE", "TRIGGER", "CREATE TEMPORARY TABLES", "LOCK TABLES"]
-        }
-      ]
-    },
-    {
-      "name": "privatelabel_user",
-      "host": "%",
-      "password": "Rt4#Vw@Jk",
-      "privileges": [
-        {
-          "database": "privatelabel",
-          "tables": "*",
-          "privileges": ["SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "ALTER", "DROP", "REFERENCES", "INDEX", "CREATE VIEW", "CREATE ROUTINE", "ALTER ROUTINE", "TRIGGER", "CREATE TEMPORARY TABLES", "LOCK TABLES"]
->>>>>>> 9ba9f65c8e17633b460245d6e1072d842aa3bc23
+            "name": "creditengine_user",
+            "host": "%",
+            "password": "rq4#rth@K",
+            "privileges": [
+                {
+                    "database": "creditengine",
+                    "tables": "*",
+                    "privileges": [
+                        "SELECT",
+                        "INSERT",
+                        "UPDATE",
+                        "DELETE",
+                        "CREATE",
+                        "ALTER",
+                        "DROP",
+                        "REFERENCES",
+                        "INDEX",
+                        "CREATE VIEW",
+                        "CREATE ROUTINE",
+                        "ALTER ROUTINE",
+                        "TRIGGER",
+                        "CREATE TEMPORARY TABLES",
+                        "LOCK TABLES"
+                    ]
+                }
+            ]
         }
     ]
 }
