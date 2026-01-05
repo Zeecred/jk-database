@@ -18,8 +18,15 @@ if [ $? -ne 0 ]; then
 	sudo apt-get install libmysqlclient-dev -y
 fi
 
+if [ ! -f my-credentials.json ]; then
+    echo "**************************************************************"
+	echo "ERROR: my-credentials.json not found. Please create it first before running this script. ABORTING."
+	echo "**************************************************************"
+	exit 1
+fi
+
 source .venv/bin/activate
 pip install -r requirements.txt
-python3 create_databases.py 
+python3 create_databases.py
 python3 create_users.py
 
