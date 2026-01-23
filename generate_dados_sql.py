@@ -5,6 +5,8 @@ from pathlib import Path
 import types
 import sys
 
+# Criei os dados usando https://box4.dev/gerador-br/geradores/
+
 BASE_DIR = Path(__file__).resolve().parent
 INPUT_JSON = BASE_DIR / "dados-inventados" / "dados-br.json"
 OUTPUT_DIR = BASE_DIR / "dados-inventados"
