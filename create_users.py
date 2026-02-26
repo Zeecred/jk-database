@@ -2,9 +2,14 @@ import json
 import mysql.connector
 import socket
 import time
+from datetime import datetime
 
 
 FORBIDDEN_PRIVILEGES = {"DROP", "ALL", "ALL PRIVILEGES"}
+
+
+def log(message):
+    print(message, flush=True)
 
 
 def sanitize_privileges(privileges):
@@ -28,7 +33,7 @@ def wait_for_port_open(host, port):
     while True:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         try:
-            print(f"Trying to connect to {host}:{port}. Count down: {count_down}")
+            log(f"Trying to connect to {host}:{port}. Count down: {count_down}")
             s.connect((host, int(port)))
             s.close()
             break
@@ -41,17 +46,20 @@ def wait_for_port_open(host, port):
 
 
 def exec_sql(cursor, sql):
-    print(sql)
+    log(sql)
     cursor.execute(sql)
 
 
 def create_users():
+    log(f"create_users.py started at {datetime.utcnow().isoformat()}Z")
     with open('users.json') as file:
         data = json.load(file)
     with open('my-credentials.json') as file:
         credentials = json.load(file)
 
-    print("Waiting for MySQL to start...")
+    users = data.get('users', [])
+    log(f"Loaded {len(users)} user entries from users.json")
+    log("Waiting for MySQL to start...")
     time.sleep(5)
     wait_for_port_open(credentials['host'], credentials['port'])
 
@@ -65,7 +73,7 @@ def create_users():
 
     cursor = db.cursor()
 
-    for user in data['users']:
+    for user in users:
         user_name = user['name']
         user_host = user['host']
         user_password = user['password']
@@ -93,6 +101,7 @@ def create_users():
     db.commit()
     cursor.close()
     db.close()
+    log("create_users.py finished successfully")
 
 
 if __name__ == "__main__":
