@@ -71,8 +71,6 @@ def create_users():
         user_password = user['password']
         user_id = f"'{user_name}'@'{user_host}'"
 
-        print(f"--- Processing user: {user_id} ---")
-
         exec_sql(cursor, f"DROP USER IF EXISTS {user_id}")
         exec_sql(cursor, f"CREATE USER {user_id} IDENTIFIED BY '{user_password}'")
 
@@ -80,25 +78,9 @@ def create_users():
             database_name = privilege['database']
             db_scope = f"`{database_name}`.*"
 
-            safe_privileges, removed_privileges = sanitize_privileges(
-                privilege['privileges']
-            )
-            if removed_privileges:
-                print(
-                    "Removing forbidden privileges from {} on {}: {}".format(
-                        user_id,
-                        database_name,
-                        ', '.join(sorted(set(removed_privileges)))
-                    )
-                )
+            safe_privileges, _ = sanitize_privileges(privilege['privileges'])
 
             if not safe_privileges:
-                print(
-                    "Skipping GRANT for {} on {} (no allowed privileges).".format(
-                        user_id,
-                        database_name
-                    )
-                )
                 continue
 
             grant_query = "GRANT {} ON {} TO {}".format(
