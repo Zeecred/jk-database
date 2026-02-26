@@ -1,5 +1,7 @@
 import json
 import mysql.connector
+import socket
+import time
 
 
 FORBIDDEN_PRIVILEGES = {"DROP", "ALL", "ALL PRIVILEGES"}
@@ -21,12 +23,37 @@ def sanitize_privileges(privileges):
     return cleaned, removed
 
 
+def wait_for_port_open(host, port):
+    count_down = 90
+    while True:
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        try:
+            print(f"Trying to connect to {host}:{port}. Count down: {count_down}")
+            s.connect((host, int(port)))
+            s.close()
+            break
+        except socket.error:
+            pass
+        count_down -= 1
+        if count_down == 0:
+            raise Exception(f"Could not connect to {host}:{port}")
+        time.sleep(0.5)
+
+
+def exec_sql(cursor, sql):
+    print(sql)
+    cursor.execute(sql)
+
+
 def create_users():
     with open('users.json') as file:
         data = json.load(file)
-
     with open('my-credentials.json') as file:
         credentials = json.load(file)
+
+    print("Waiting for MySQL to start...")
+    time.sleep(5)
+    wait_for_port_open(credentials['host'], credentials['port'])
 
     db = mysql.connector.connect(
         user=credentials['username'],
@@ -39,38 +66,27 @@ def create_users():
     cursor = db.cursor()
 
     for user in data['users']:
-        query = "SELECT COUNT(*) FROM mysql.user WHERE User = '{}'".format(user['name'])
-        cursor.execute(query)
-        result = cursor.fetchone()
-        if result[0] == 0:
-            print(f"Creating user: {user['name']}")
-            query = "CREATE USER '{}'@'{}' IDENTIFIED BY '{}'".format(
-                user['name'], user['host'], user['password'])
-            cursor.execute(query)
+        user_name = user['name']
+        user_host = user['host']
+        user_password = user['password']
+        user_id = f"'{user_name}'@'{user_host}'"
+
+        print(f"--- Processing user: {user_id} ---")
+
+        exec_sql(cursor, f"DROP USER IF EXISTS {user_id}")
+        exec_sql(cursor, f"CREATE USER {user_id} IDENTIFIED BY '{user_password}'")
 
         for privilege in user['privileges']:
             database_name = privilege['database']
-
-            # Never allow DROP for common users (covers TABLE and DATABASE in db scope).
-            revoke_query = "REVOKE DROP ON `{}`.* FROM '{}'@'{}'".format(
-                database_name,
-                user['name'],
-                user['host']
-            )
-            try:
-                cursor.execute(revoke_query)
-            except mysql.connector.Error:
-                # User may have no DROP privilege yet; safe to continue.
-                pass
+            db_scope = f"`{database_name}`.*"
 
             safe_privileges, removed_privileges = sanitize_privileges(
                 privilege['privileges']
             )
             if removed_privileges:
                 print(
-                    "Removing forbidden privileges from {}@{} on {}: {}".format(
-                        user['name'],
-                        user['host'],
+                    "Removing forbidden privileges from {} on {}: {}".format(
+                        user_id,
                         database_name,
                         ', '.join(sorted(set(removed_privileges)))
                     )
@@ -78,21 +94,19 @@ def create_users():
 
             if not safe_privileges:
                 print(
-                    "Skipping GRANT for {}@{} on {} (no allowed privileges).".format(
-                        user['name'],
-                        user['host'],
+                    "Skipping GRANT for {} on {} (no allowed privileges).".format(
+                        user_id,
                         database_name
                     )
                 )
                 continue
 
-            grant_query = "GRANT {} ON `{}`.* TO '{}'@'{}'".format(
-                ', '.join(safe_privileges),
-                database_name,
-                user['name'],
-                user['host']
+            grant_query = "GRANT {} ON {} TO {}".format(
+                ', '.join(safe_privileges), db_scope, user_id
             )
-            cursor.execute(grant_query)
+            exec_sql(cursor, grant_query)
+
+    exec_sql(cursor, "FLUSH PRIVILEGES")
 
     db.commit()
     cursor.close()
