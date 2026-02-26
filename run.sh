@@ -8,12 +8,14 @@ if ! [ -x "$(command -v python3)" ]; then
 	exit 1
 fi
 
+INSTALL_REQUIRED=false
 echo "Loading existing virtual environment."
 if [ ! -d .venv ]; then
+    sudo apt install python3.12-venv
 	python3 -mvenv .venv
+	INSTALL_REQUIRED=true
 fi
 
-INSTALL_REQUIRED=false
 dpkg -l | grep libmysqlclient-dev
 if [ $? -ne 0 ]; then
 	sudo apt-get update
