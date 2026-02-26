@@ -1,10 +1,6 @@
 [
     "core",
-    "ccb",
-    "employeecredit",
-    "fgtsbmp",
-    "payrollloanbmp",
-    "privatelabel",
-    "creditengine",
+    "eployee_credit_qitech",
+    "credit_engine_qitech",
     "queuesentry"
 ]

@@ -29,40 +29,12 @@
             ]
         },
         {
-            "name": "ccb_user",
-            "host": "%",
-            "password": "mZ3#Pq@Jk",
-            "privileges": [
-                {
-                    "database": "ccb",
-                    "tables": "*",
-                    "privileges": [
-                        "SELECT",
-                        "INSERT",
-                        "UPDATE",
-                        "DELETE",
-                        "CREATE",
-                        "ALTER",
-                        "DROP",
-                        "REFERENCES",
-                        "INDEX",
-                        "CREATE VIEW",
-                        "CREATE ROUTINE",
-                        "ALTER ROUTINE",
-                        "TRIGGER",
-                        "CREATE TEMPORARY TABLES",
-                        "LOCK TABLES"
-                    ]
-                }
-            ]
-        },
-        {
-            "name": "employeecredit_user",
+            "name": "employee_credit_qitech_user",
             "host": "%",
             "password": "Qw4#Rt@Jk",
             "privileges": [
                 {
-                    "database": "employeecredit",
+                    "database": "employee_credit_qitech",
                     "tables": "*",
                     "privileges": [
                         "SELECT",
@@ -85,68 +57,12 @@
             ]
         },
         {
-            "name": "fgtsbmp_user",
+            "name": "credit_engine_qitech_user",
             "host": "%",
-            "password": "Hk5#Jp@Jk",
+            "password": "rq4#rth@K",
             "privileges": [
                 {
-                    "database": "fgtsbmp",
-                    "tables": "*",
-                    "privileges": [
-                        "SELECT",
-                        "INSERT",
-                        "UPDATE",
-                        "DELETE",
-                        "CREATE",
-                        "ALTER",
-                        "DROP",
-                        "REFERENCES",
-                        "INDEX",
-                        "CREATE VIEW",
-                        "CREATE ROUTINE",
-                        "ALTER ROUTINE",
-                        "TRIGGER",
-                        "CREATE TEMPORARY TABLES",
-                        "LOCK TABLES"
-                    ]
-                }
-            ]
-        },
-        {
-            "name": "payrollloanbmp_user",
-            "host": "%",
-            "password": "Xc3#Lq@Jk",
-            "privileges": [
-                {
-                    "database": "payrollloanbmp",
-                    "tables": "*",
-                    "privileges": [
-                        "SELECT",
-                        "INSERT",
-                        "UPDATE",
-                        "DELETE",
-                        "CREATE",
-                        "ALTER",
-                        "DROP",
-                        "REFERENCES",
-                        "INDEX",
-                        "CREATE VIEW",
-                        "CREATE ROUTINE",
-                        "ALTER ROUTINE",
-                        "TRIGGER",
-                        "CREATE TEMPORARY TABLES",
-                        "LOCK TABLES"
-                    ]
-                }
-            ]
-        },
-        {
-            "name": "privatelabel_user",
-            "host": "%",
-            "password": "Rt4#Vw@Jk",
-            "privileges": [
-                {
-                    "database": "privatelabel",
+                    "database": "credit_engine_qitech",
                     "tables": "*",
                     "privileges": [
                         "SELECT",
@@ -175,34 +91,6 @@
             "privileges": [
                 {
                     "database": "queuesentry",
-                    "tables": "*",
-                    "privileges": [
-                        "SELECT",
-                        "INSERT",
-                        "UPDATE",
-                        "DELETE",
-                        "CREATE",
-                        "ALTER",
-                        "DROP",
-                        "REFERENCES",
-                        "INDEX",
-                        "CREATE VIEW",
-                        "CREATE ROUTINE",
-                        "ALTER ROUTINE",
-                        "TRIGGER",
-                        "CREATE TEMPORARY TABLES",
-                        "LOCK TABLES"
-                    ]
-                }
-            ]
-        },
-        {
-            "name": "creditengine_user",
-            "host": "%",
-            "password": "rq4#rth@K",
-            "privileges": [
-                {
-                    "database": "creditengine",
                     "tables": "*",
                     "privileges": [
                         "SELECT",
