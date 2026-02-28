@@ -1,11 +1,12 @@
-import json
 import mysql.connector
+import json
+
+from db_credentials import load_db_credentials
 
 with open('databases.json') as f:
     databases = json.load(f)
 
-with open('my-credentials.json') as file:
-    credentials = json.load(file)
+credentials = load_db_credentials()
 
 import socket
 import time
@@ -47,4 +48,3 @@ for db in databases:
 
 cursor.close()
 cnx.close()
-

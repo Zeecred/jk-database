@@ -24,10 +24,10 @@ if [ $? -ne 0 ]; then
 	INSTALL_REQUIRED=true
 fi
 
-if [ ! -f my-credentials.json ]; then
-	echo "**************************************************************"
-	echo "ERROR: my-credentials.json not found. Please create it first before running this script. ABORTING."
-	echo "**************************************************************"
+if [ ! -f ../.env ] && [ ! -f my-credentials.json ]; then
+	echo "***********************************************************************"
+	echo "ERROR: neither ../.env nor my-credentials.json was found. ABORTING."
+	echo "***********************************************************************"
 	exit 1
 fi
 

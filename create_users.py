@@ -4,13 +4,14 @@ import socket
 import time
 from datetime import datetime
 
+from db_credentials import load_db_credentials
+
 
 FORBIDDEN_PRIVILEGES = {"DROP", "ALL", "ALL PRIVILEGES"}
 
 
 def log(message):
     print(message, flush=True)
-
 
 def sanitize_privileges(privileges):
     cleaned = []
@@ -54,8 +55,7 @@ def create_users():
     log(f"create_users.py started at {datetime.utcnow().isoformat()}Z")
     with open('users.json') as file:
         data = json.load(file)
-    with open('my-credentials.json') as file:
-        credentials = json.load(file)
+    credentials = load_db_credentials()
 
     users = data.get('users', [])
     log(f"Loaded {len(users)} user entries from users.json")

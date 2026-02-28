@@ -59,7 +59,7 @@
         {
             "name": "credit_engine_qitech_user",
             "host": "%",
-            "password": "rq4#rth@K",
+            "password": "rq24rHthK",
             "privileges": [
                 {
                     "database": "credit_engine_qitech",
