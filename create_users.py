@@ -7,7 +7,7 @@ from datetime import datetime
 from db_credentials import load_db_credentials
 
 
-FORBIDDEN_PRIVILEGES = {"DROP", "ALL", "ALL PRIVILEGES"}
+FORBIDDEN_PRIVILEGES = {"ALL", "ALL PRIVILEGES"}
 
 
 def log(message):
