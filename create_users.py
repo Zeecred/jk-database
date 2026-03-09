@@ -62,6 +62,11 @@ def create_users():
     log("Waiting for MySQL to start...")
     time.sleep(5)
     wait_for_port_open(credentials['host'], credentials['port'])
+    log(
+        "Connecting with mysql.connector "
+        f"host={credentials['host']} port={credentials['port']} "
+        f"user={credentials['username']} database=mysql",
+    )
 
     db = mysql.connector.connect(
         user=credentials['username'],

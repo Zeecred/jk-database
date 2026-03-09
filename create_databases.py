@@ -30,6 +30,11 @@ def wait_for_port_open(host, port):
 print("Waiting for MySQL to start...")
 time.sleep(5)
 wait_for_port_open(credentials['host'], credentials['port'])
+print(
+    "Connecting with mysql.connector "
+    f"host={credentials['host']} port={credentials['port']} "
+    f"user={credentials['username']} database=mysql",
+)
 
 cnx = mysql.connector.connect(
     user=credentials['username'],
