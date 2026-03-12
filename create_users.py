@@ -5,6 +5,7 @@ import time
 from datetime import datetime
 
 from db_credentials import load_db_credentials
+from db_grants import ensure_can_manage_users
 
 
 FORBIDDEN_PRIVILEGES = {"ALL", "ALL PRIVILEGES"}
@@ -51,6 +52,18 @@ def exec_sql(cursor, sql):
     cursor.execute(sql)
 
 
+def collect_required_schema_privileges(users):
+    required = {}
+    for user in users:
+        for privilege in user.get("privileges", []):
+            database_name = privilege["database"]
+            safe_privileges, _ = sanitize_privileges(privilege.get("privileges", []))
+            if not safe_privileges:
+                continue
+            required.setdefault(database_name, set()).update(safe_privileges)
+    return required
+
+
 def create_users():
     log(f"create_users.py started at {datetime.utcnow().isoformat()}Z")
     with open('users.json') as file:
@@ -77,6 +90,7 @@ def create_users():
     )
 
     cursor = db.cursor()
+    ensure_can_manage_users(cursor, collect_required_schema_privileges(users))
 
     for user in users:
         user_name = user['name']
@@ -100,8 +114,6 @@ def create_users():
                 ', '.join(safe_privileges), db_scope, user_id
             )
             exec_sql(cursor, grant_query)
-
-    exec_sql(cursor, "FLUSH PRIVILEGES")
 
     db.commit()
     cursor.close()

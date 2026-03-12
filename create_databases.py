@@ -2,6 +2,7 @@ import mysql.connector
 import json
 
 from db_credentials import load_db_credentials
+from db_grants import ensure_can_create_databases
 
 with open('databases.json') as f:
     databases = json.load(f)
@@ -45,6 +46,7 @@ cnx = mysql.connector.connect(
 )
 
 cursor = cnx.cursor()
+ensure_can_create_databases(cursor)
 
 for db in databases:
     sql = f"CREATE DATABASE IF NOT EXISTS {db} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
