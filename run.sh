@@ -17,13 +17,13 @@ source "$ENV_FILE"
 set +a
 
 NETWORK="${DOCKER_HOST_NETWORK:-jk-network}"
-PYTHON_IMAGE="python:3.12-slim"
+IMAGE_NAME="jk-db-setup"
 CONTAINER_NAME="jk-db-setup"
 
 echo "Rede Docker: $NETWORK"
-echo "Usando imagem $PYTHON_IMAGE para rodar os scripts de banco."
+echo "Construindo/usando imagem $IMAGE_NAME para rodar os scripts de banco."
 
-docker pull "$PYTHON_IMAGE"
+docker build -t "$IMAGE_NAME:latest" "$SCRIPT_DIR"
 
 if docker ps -a --format '{{.Names}}' | grep -q "^${CONTAINER_NAME}\$"; then
   echo "Removendo container antigo ${CONTAINER_NAME}..."
@@ -37,5 +37,5 @@ docker run --rm \
   -w /workspace/jk-database \
   -e MYSQL_HOST="mysql" \
   -e MYSQL_EXPOSED_PORT="3306" \
-  "$PYTHON_IMAGE" \
-  bash -c "apt-get update && apt-get install -y --no-install-recommends pkg-config default-libmysqlclient-dev build-essential && pip install -r requirements.txt && python create_databases.py && python create_users.py"
+  "$IMAGE_NAME:latest" \
+  bash -c "figlet JK-DATABASE && python create_databases.py && python create_users.py"
