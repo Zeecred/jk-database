@@ -3,42 +3,39 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-cd "$SCRIPT_DIR" || exit 1
+PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+ENV_FILE="$PROJECT_ROOT/.env"
 
-if ! [ -x "$(command -v python3)" ]; then
-	echo "ERROR: python3 command not found. Please install Python 3 first before running this script. ABORTING."
-	exit 1
+if [ ! -f "$ENV_FILE" ]; then
+  echo "ERROR: .env não encontrado em $ENV_FILE. ABORTING."
+  exit 1
 fi
 
-PYTHON_VERSION="$(python3 -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')"
-PYTHON_VENV_PACKAGE="python${PYTHON_VERSION}-venv"
+set -a
 
-INSTALL_REQUIRED=false
-echo "Loading existing virtual environment."
-if [ ! -f .venv/bin/activate ]; then
-    sudo apt install -y "$PYTHON_VENV_PACKAGE"
-	python3 -m venv .venv
-	INSTALL_REQUIRED=true
+source "$ENV_FILE"
+set +a
+
+NETWORK="${DOCKER_HOST_NETWORK:-jk-network}"
+PYTHON_IMAGE="python:3.12-slim"
+CONTAINER_NAME="jk-db-setup"
+
+echo "Rede Docker: $NETWORK"
+echo "Usando imagem $PYTHON_IMAGE para rodar os scripts de banco."
+
+docker pull "$PYTHON_IMAGE"
+
+if docker ps -a --format '{{.Names}}' | grep -q "^${CONTAINER_NAME}\$"; then
+  echo "Removendo container antigo ${CONTAINER_NAME}..."
+  docker rm -f "$CONTAINER_NAME" >/dev/null 2>&1 || true
 fi
 
-if ! dpkg -l | grep -q libmysqlclient-dev; then
-	sudo apt-get update
-	sudo apt-get install -y pkg-config build-essential python3-dev default-libmysqlclient-dev
-	sudo apt-get install libmysqlclient-dev -y
-	INSTALL_REQUIRED=true
-fi
-
-if [ ! -f ../.env ] && [ ! -f my-credentials.json ]; then
-	echo "***********************************************************************"
-	echo "ERROR: neither ../.env nor my-credentials.json was found. ABORTING."
-	echo "***********************************************************************"
-	exit 1
-fi
-
-source .venv/bin/activate
-if $INSTALL_REQUIRED; then
-    python3 -m pip install -U pip setuptools wheel
-fi
-python3 -m pip install -r requirements.txt
-python3 create_databases.py
-python3 create_users.py
+docker run --rm \
+  --name "$CONTAINER_NAME" \
+  --network "$NETWORK" \
+  -v "$PROJECT_ROOT":/workspace \
+  -w /workspace/jk-database \
+  -e MYSQL_HOST="mysql" \
+  -e MYSQL_EXPOSED_PORT="3306" \
+  "$PYTHON_IMAGE" \
+  bash -c "apt-get update && apt-get install -y --no-install-recommends pkg-config default-libmysqlclient-dev build-essential && pip install -r requirements.txt && python create_databases.py && python create_users.py"
