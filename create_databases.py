@@ -29,6 +29,8 @@ def wait_for_port_open(host, port):
         time.sleep(0.5)
 
 print("Waiting for MySQL to start...")
+print(f"Host: {credentials['host']} Port: {credentials['port']}")
+print(f"Username: {credentials['username']} Password: {credentials['password']}")
 time.sleep(5)
 wait_for_port_open(credentials['host'], credentials['port'])
 print(
