@@ -39,3 +39,5 @@ docker run --rm \
   -e MYSQL_EXPOSED_PORT="3306" \
   "$IMAGE_NAME:latest" \
   bash -c "figlet JK-DATABASE && python create_databases.py && python create_users.py"
+
+  echo $?
