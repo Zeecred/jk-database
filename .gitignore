@@ -218,6 +218,13 @@ __pycache__/
 build/
 develop-eggs/
 dist/
+
+# Local-only artifacts
+dados-inventados/
+estrutura/core_access_keys.sql
+generate_vendedores_propostas.py
+replication/
+tests/
 downloads/
 eggs/
 .eggs/
