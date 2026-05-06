@@ -1,0 +1,54 @@
+/*M!999999\- enable the sandbox mode */ 
+-- MariaDB dump 10.19  Distrib 10.6.22-MariaDB, for debian-linux-gnu (x86_64)
+--
+-- Host: 127.0.0.1    Database: core
+-- ------------------------------------------------------
+-- Server version	10.11.13-MariaDB-0ubuntu0.24.04.1-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `persons_individual`
+--
+
+DROP TABLE IF EXISTS `persons_individual`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `persons_individual` (
+  `id` char(36) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
+  `occupation_id` char(36) CHARACTER SET ascii COLLATE ascii_bin DEFAULT NULL,
+  `naturalness_city_id` char(36) CHARACTER SET ascii COLLATE ascii_bin DEFAULT NULL COMMENT 'Cidade de naturalidade',
+  `is_pep` tinyint(4) NOT NULL DEFAULT 0,
+  `document` varchar(45) NOT NULL COMMENT 'CPF',
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_PERSONS_INDIVIDUAL_NATURALNESS_CITY_ID_IDX` (`naturalness_city_id`),
+  KEY `IDX_PERSONS_INDIVIDUAL_DOCUMENT` (`document`),
+  KEY `IDX_PERSONS_INDIVIDUAL_NAME` (`name`),
+  KEY `FK_PERSONS_INDIVIDUAL_OCCUPATION_ID_IDX` (`occupation_id`),
+  KEY `IDX_PERSONS_INDIVIDUAL_IS_PEP` (`is_pep`),
+  CONSTRAINT `FK_PERSONS_INDIVIDUAL_NATURALNESS_CITY` FOREIGN KEY (`naturalness_city_id`) REFERENCES `cities` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_PERSONS_INDIVIDUAL_OCCUPATIONS` FOREIGN KEY (`occupation_id`) REFERENCES `occupations` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_PERSONS_INDIVIDUAL_PERSONS` FOREIGN KEY (`id`) REFERENCES `persons` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2026-01-23 17:11:14

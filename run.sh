@@ -1,16 +1,43 @@
 #!/bin/bash
-if [ ! -d .venv ]; then
-    python3 -m venv .venv
+
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+ENV_FILE="$PROJECT_ROOT/.env"
+
+if [ ! -f "$ENV_FILE" ]; then
+  echo "ERROR: .env não encontrado em $ENV_FILE. ABORTING."
+  exit 1
 fi
 
-if ! [ -x "$(command -v python3)" ]; then
-    echo "ERROR: python3 command not found. Please install Python 3 first before running this script. ABORTING."
-    exit 1
+set -a
+
+source "$ENV_FILE"
+set +a
+
+NETWORK="${DOCKER_HOST_NETWORK:-jk-network}"
+IMAGE_NAME="jk-db-setup"
+CONTAINER_NAME="jk-db-setup"
+
+echo "Rede Docker: $NETWORK"
+echo "Construindo/usando imagem $IMAGE_NAME para rodar os scripts de banco."
+
+docker build -t "$IMAGE_NAME:latest" "$SCRIPT_DIR"
+
+if docker ps -a --format '{{.Names}}' | grep -q "^${CONTAINER_NAME}\$"; then
+  echo "Removendo container antigo ${CONTAINER_NAME}..."
+  docker rm -f "$CONTAINER_NAME" >/dev/null 2>&1 || true
 fi
 
-echo "Loading existing virtual environment."
-source .venv/bin/activate
-pip install -r requirements.txt
-python3 create_databases.py 
-python3 create_users.py
+docker run --rm \
+  --name "$CONTAINER_NAME" \
+  --network "$NETWORK" \
+  -v "$PROJECT_ROOT":/workspace \
+  -w /workspace/jk-database \
+  -e MYSQL_HOST="mysql" \
+  -e MYSQL_EXPOSED_PORT="3306" \
+  "$IMAGE_NAME:latest" \
+  bash -c "figlet JK-DATABASE && python create_databases.py && python create_users.py"
 
+  echo $?
