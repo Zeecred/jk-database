@@ -2,5 +2,7 @@
     "core",
     "employee_credit_qitech",
     "credit_engine_qitech",
+    "credit_engine_uy3",
+    "employee_credit_uy3",
     "queuesentry"
 ]
