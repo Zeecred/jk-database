@@ -115,6 +115,35 @@
                     ]
                 }
             ]
+        },
+        {
+            "name": "wh_ingestor_user",
+            "host": "%",
+            "password": "axFn940P2NCZsnGt",
+            "privileges": [
+                {
+                    "database": "wh_ingestor",
+                    "tables": "*",
+                    "privileges": [
+                        "SELECT",
+                        "INSERT",
+                        "UPDATE",
+                        "DELETE",
+                        "CREATE",
+                        "ALTER",
+                        "DROP",
+                        "REFERENCES",
+                        "INDEX",
+                        "CREATE VIEW",
+                        "CREATE ROUTINE",
+                        "ALTER ROUTINE",
+                        "EVENT",
+                        "TRIGGER",
+                        "CREATE TEMPORARY TABLES",
+                        "LOCK TABLES"
+                    ]
+                }
+            ]
         }
     ]
 }
