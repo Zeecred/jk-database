@@ -144,6 +144,35 @@
                     ]
                 }
             ]
+        },
+        {
+            "name": "billing_control_neofin_user",
+            "host": "%",
+            "password": "t4NuFuRTyVbYlJy0CNHT",
+            "privileges": [
+                {
+                    "database": "billing_control_neofin",
+                    "tables": "*",
+                    "privileges": [
+                        "SELECT",
+                        "INSERT",
+                        "UPDATE",
+                        "DELETE",
+                        "CREATE",
+                        "ALTER",
+                        "DROP",
+                        "REFERENCES",
+                        "INDEX",
+                        "CREATE VIEW",
+                        "CREATE ROUTINE",
+                        "ALTER ROUTINE",
+                        "EVENT",
+                        "TRIGGER",
+                        "CREATE TEMPORARY TABLES",
+                        "LOCK TABLES"
+                    ]
+                }
+            ]
         }
     ]
 }
